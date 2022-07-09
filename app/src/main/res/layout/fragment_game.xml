@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.GameFragment"
+    android:background="#D1F8F0">
+
+
+    <TextView
+        android:id="@+id/tv_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="00:00" />
+
+    <TextView
+        android:id="@+id/tv_sum"
+        style="@style/QuestionTextStyle"
+        android:layout_width="260dp"
+        android:layout_height="144dp"
+        android:background="#1144AA"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintBottom_toTopOf="@id/left_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="20"
+        app:layout_constraintVertical_chainStyle="packed"/>
+
+    <TextView
+        android:id="@+id/left_number"
+        style="@style/AnswerTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FFDA00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/tv_sum"
+        app:layout_constraintTop_toBottomOf="@id/tv_sum"
+        tools:text="22" />
+
+    <TextView
+        android:id="@+id/right_number"
+        style="@style/AnswerTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FFDA00"
+        app:layout_constraintBottom_toBottomOf="@id/left_number"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@+id/tv_sum"
+        app:layout_constraintTop_toTopOf="@id/left_number"
+        tools:text="@string/question_symbol" />
+
+    <TextView
+        android:id="@+id/answer1"
+        style="@style/AnswerTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/answer4"
+        app:layout_constraintEnd_toStartOf="@id/answer2"
+        tools:text="15"
+        android:background="#67AB2B"
+        />
+    <TextView
+        android:id="@+id/answer2"
+        style="@style/AnswerTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/answer1"
+        app:layout_constraintBottom_toTopOf="@id/answer5"
+        app:layout_constraintEnd_toStartOf="@id/answer3"
+        tools:text="11"
+        android:background="#FF7640"
+        />
+    <TextView
+        android:id="@+id/answer3"
+        style="@style/AnswerTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/answer2"
+        app:layout_constraintBottom_toTopOf="@id/answer6"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="11"
+        android:background="#FFE800"
+        />
+
+
+    <TextView
+        android:id="@+id/answer4"
+        style="@style/AnswerTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/answer5"
+        tools:text="15"
+        android:background="#FF9C08"
+        />
+    <TextView
+        android:id="@+id/answer5"
+        style="@style/AnswerTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/answer4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/answer6"
+        tools:text="11"
+        android:background="#8243D6"
+        />
+    <TextView
+        android:id="@+id/answer6"
+        style="@style/AnswerTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/answer5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="11"
+        android:background="#00A779"
+        />
+
+    <TextView
+        android:id="@+id/tv_progress"
+        android:layout_width="0dp"
+        android:layout_height="17dp"
+        app:layout_constraintBottom_toTopOf="@id/progress_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/left_number"
+        app:layout_constraintVertical_chainStyle="spread"
+        tools:text="Правильных ответов %s из %s"
+        android:layout_margin="16dp"
+        />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_progress"
+        app:layout_constraintBottom_toTopOf="@id/answer1"
+        android:max="100"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
