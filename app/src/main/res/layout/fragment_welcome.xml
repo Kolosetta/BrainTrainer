@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.WelcomeFragment">
+    tools:context=".presentation.WelcomeFragment"
+    android:background="#DAF2FF">
 
     <ImageView
         android:id="@+id/brain_logo"
@@ -25,6 +26,7 @@
         android:layout_margin="16dp"
         android:textSize="28sp"
         android:gravity="center"
+        android:fontFamily="sans-serif-medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/brain_logo"
