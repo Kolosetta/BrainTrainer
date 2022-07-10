@@ -6,14 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.braintrainer.R
+import com.example.braintrainer.databinding.FragmentChooseLevelBinding
+import com.example.braintrainer.databinding.FragmentGameBinding
 
 class ChooseLevelFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_choose_level, container, false)
+    private lateinit var binding: FragmentChooseLevelBinding
+    
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentChooseLevelBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 }

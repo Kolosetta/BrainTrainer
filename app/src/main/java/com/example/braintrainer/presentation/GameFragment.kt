@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.braintrainer.R
+import com.example.braintrainer.databinding.FragmentGameBinding
+import com.example.braintrainer.databinding.FragmentResultBinding
 
 class GameFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
 
-        return inflater.inflate(R.layout.fragment_game, container, false)
+    private lateinit var binding: FragmentGameBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentGameBinding.inflate(inflater, container, false)
+        return binding.root
     }
 }

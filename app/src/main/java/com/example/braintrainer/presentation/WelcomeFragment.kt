@@ -6,14 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.braintrainer.R
+import com.example.braintrainer.databinding.FragmentWelcomeBinding
 
 class WelcomeFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_welcome, container, false)
+    private lateinit var binding: FragmentWelcomeBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentWelcomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.nextButton.setOnClickListener{
+
+        }
+
+    }
 }
