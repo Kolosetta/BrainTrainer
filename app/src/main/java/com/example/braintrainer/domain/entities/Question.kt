@@ -5,4 +5,6 @@ data class Question(
     val visibleNumber: Int,
     val answers: List<Int>
 ) {
+    val rightAnswer: Int
+    get() = sum - visibleNumber
 }

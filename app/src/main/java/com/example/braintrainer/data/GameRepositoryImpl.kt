@@ -23,7 +23,8 @@ object  GameRepositoryImpl: GameRepository {
         while(answers.size < countOfAnswers){
             answers.add(Random.nextInt(MIN_VISIBLE_VALUE, maxSumValue))
         }
-        return Question(sum, visibleNumber, answers.toList())
+        //Возвращаем список ответов в перемешанном листе
+        return Question(sum, visibleNumber, answers.toList().shuffled())
     }
 
     override fun getGameSettings(level: Level): GameSettings {

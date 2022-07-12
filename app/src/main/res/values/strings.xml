@@ -11,4 +11,5 @@
     <string name="level_test">Тестовый</string>
     <string name="choose_level">Выберите уровень сложности</string>
     <string name="question_symbol">\?</string>
+    <string name="answers_progress">Правильных ответов %s из %s</string>
 </resources>

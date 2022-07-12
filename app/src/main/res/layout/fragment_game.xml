@@ -136,7 +136,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/left_number"
         app:layout_constraintVertical_chainStyle="spread"
-        tools:text="Правильных ответов %s из %s"
+        android:text="@string/answers_progress"
         android:layout_margin="16dp"
         />
 
