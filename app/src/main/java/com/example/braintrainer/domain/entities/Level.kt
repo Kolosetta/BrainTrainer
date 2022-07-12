@@ -1,8 +1,10 @@
 package com.example.braintrainer.domain.entities
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-enum class Level : Serializable {
+@Parcelize
+enum class Level : Parcelable {
     TEST,
     EASY,
     NORMAL,
