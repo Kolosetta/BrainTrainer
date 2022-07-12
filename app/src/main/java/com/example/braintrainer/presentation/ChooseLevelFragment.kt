@@ -12,10 +12,17 @@ import com.example.braintrainer.databinding.FragmentGameBinding
 class ChooseLevelFragment : Fragment() {
 
     private lateinit var binding: FragmentChooseLevelBinding
-    
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentChooseLevelBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    companion object {
+
+        fun newInstance(): ChooseLevelFragment {
+            return ChooseLevelFragment()
+        }
     }
 
 }

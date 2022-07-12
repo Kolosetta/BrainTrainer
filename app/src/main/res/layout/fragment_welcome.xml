@@ -10,9 +10,9 @@
     <ImageView
         android:id="@+id/brain_logo"
         android:layout_width="0dp"
-        android:layout_height="230dp"
-        android:src="@drawable/ic_brain"
-        android:layout_margin="40dp"
+        android:layout_height="160dp"
+        android:layout_margin="30dp"
+        android:src="@drawable/ic_brain_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +52,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginVertical="40dp"
+        android:layout_marginVertical="20dp"
         android:layout_marginHorizontal="22dp"
         android:text="@string/rules_agree"
         />
