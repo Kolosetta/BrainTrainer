@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import com.example.braintrainer.R
 import com.example.braintrainer.databinding.FragmentGameBinding
 import com.example.braintrainer.databinding.FragmentResultBinding
+import com.example.braintrainer.domain.entities.GameResult
+import com.example.braintrainer.domain.entities.GameSettings
 import com.example.braintrainer.domain.entities.Level
 
 class GameFragment : Fragment() {
@@ -25,14 +27,29 @@ class GameFragment : Fragment() {
         parseArgs()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.answer1.setOnClickListener{
+            launchResultFragment(GameResult(true, 10,20,
+                GameSettings(10,10,10,10)))
+        }
+    }
+
     private fun parseArgs(){
         level = requireArguments().getSerializable(KEY_LEVEL) as Level
     }
 
+    private fun launchResultFragment(gameResult: GameResult){
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, ResultFragment.newInstance(gameResult))
+            .addToBackStack(null)
+            .commit()
+    }
+
 
     companion object {
-
         private const val KEY_LEVEL = "level"
+        const val NAME = "game_fragment"
 
         fun newInstance(level: Level): GameFragment {
             return GameFragment().apply {
