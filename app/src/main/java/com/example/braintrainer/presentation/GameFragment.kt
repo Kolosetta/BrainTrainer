@@ -50,7 +50,7 @@ class GameFragment : Fragment() {
     private fun setupQuestion(){
 
     }
-    
+
     private fun parseArgs(){
         requireArguments().getParcelable<Level>(KEY_LEVEL)?.let {
             level = it
