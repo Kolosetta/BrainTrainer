@@ -1,7 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">BrainTrainer</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="brain_trainer_title">Brain trainer</string>
     <string name="game_rules">Правила игры: Перед вами будет три фигуры. В верхней отображена сумма двух чисел. В одной из нижних слагаемое этого числа. Ваша цель выбрать второе слагаемое так, чтобы их сумма была равна верхнему числу \n \n Пример: в верхней фигуре отображено число 9, в одной из нижних 5. Значит правильным ответом является число 4</string>
     <string name="rules_agree">Понятно</string>
     <string name="hard_level">Сложный</string>
@@ -16,5 +14,4 @@
     <string name="required_percent_answers_label">Необходимый процент правильных ответов: \n %s</string>
     <string name="your_percent_label">Ваш процент правльных ответов: \n %s</string>
     <string name="try_again_btn">Попробовать еще раз</string>
-    <string name="result_smile_description">Result Smile</string>
 </resources>

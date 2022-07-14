@@ -27,8 +27,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private var countOfRightAnswers = 0
     private var countOfQuestions = 0
 
-    //TODO Закончил на 20:00 6.9
-
     //Хранит процент правильных ответов
     private val _percentsOfRightAnswers = MutableLiveData<Int>()
     val percentsOfRightAnswers: LiveData<Int>
