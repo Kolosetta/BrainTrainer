@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.braintrainer.R
 import com.example.braintrainer.data.GameRepositoryImpl
+import com.example.braintrainer.domain.entities.GameResult
 import com.example.braintrainer.domain.entities.GameSettings
 import com.example.braintrainer.domain.entities.Level
 import com.example.braintrainer.domain.entities.Question
@@ -38,6 +39,11 @@ class GameFragmentViewModel(application: Application) : AndroidViewModel(applica
     val countOfRightAnswersLD: LiveData<String>
         get() = _countOfRightAnswers
 
+    //Хранит минимальынй процент, необходимы для победы в зависимости от уровня сложности
+    private val _secondaryPercent = MutableLiveData<Int>()
+    val secondaryPercent: LiveData<Int>
+        get() = _secondaryPercent
+
     //Хранит bool, достаточно ли ответов для победы
     private val _enoughCountOfRightAnswers = MutableLiveData<Boolean>()
     val enoughCountOfRightAnswers: LiveData<Boolean>
@@ -58,9 +64,15 @@ class GameFragmentViewModel(application: Application) : AndroidViewModel(applica
     val timeLeft: LiveData<String>
         get() = _timeLeft
 
+    //Хранит в форматированной строке оставшееся время
+    private val _gameResult = MutableLiveData<GameResult>()
+    val gameResult: LiveData<GameResult>
+        get() = _gameResult
+
 
     fun startGame(level: Level){
         gameSettings = getGameSettingsUseCase.invoke(level)
+        _secondaryPercent.value = gameSettings.minPercentOfRightAnswers
         startTimer()
         generateQuestion()
     }
@@ -80,7 +92,7 @@ class GameFragmentViewModel(application: Application) : AndroidViewModel(applica
     }
 
     //Генерирует вопрос и кладет в LiveData
-    fun generateQuestion(){
+    private fun generateQuestion(){
         _question.value = generateQuestionUseCase.invoke(gameSettings.maxSumValue)
     }
 
@@ -95,7 +107,7 @@ class GameFragmentViewModel(application: Application) : AndroidViewModel(applica
         generateQuestion()
     }
 
-    //Люновляет процент и кол-во правильных ответов
+    //Обновляет процент и кол-во правильных ответов
     private fun updateProgress(){
         val progressPercent = ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt() //В процентах
         _percentsOfRightAnswers.value = progressPercent
@@ -104,11 +116,20 @@ class GameFragmentViewModel(application: Application) : AndroidViewModel(applica
             countOfRightAnswers,
             gameSettings.minCountOfRightAnswers
         )
+        //Обновляет флаги, достаточно ли ответов и процента правильных для победы
+        _enoughCountOfRightAnswers.value = countOfRightAnswers >= gameSettings.minCountOfRightAnswers
+        _enoughPercentOfRightAnswers.value = progressPercent >= gameSettings.minPercentOfRightAnswers
     }
 
     //Завершает игру
     private fun finishGame(){
-
+        val gameResult = GameResult(
+            isWon = enoughCountOfRightAnswers.value == true && enoughPercentOfRightAnswers.value ==true,
+            countOfRightAnswers = countOfRightAnswers,
+            countOfQuestions = countOfQuestions,
+            gameSettings = gameSettings
+        )
+        _gameResult.value = gameResult
     }
 
     //Преобразует миллисекунды в форматированную строку
