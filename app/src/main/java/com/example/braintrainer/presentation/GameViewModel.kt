@@ -75,6 +75,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         _secondaryPercent.value = gameSettings.minPercentOfRightAnswers
         startTimer()
         generateQuestion()
+        updateProgress()
     }
 
     //Стартует таймер продолжительностью в длительность игры в gameSettings
@@ -109,7 +110,13 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     //Обновляет процент и кол-во правильных ответов
     private fun updateProgress(){
-        val progressPercent = ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt() //В процентах
+        //В процентах
+        val progressPercent = if(countOfQuestions == 0){
+            0
+        }
+        else {
+            ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt()
+        }
         _percentsOfRightAnswers.value = progressPercent
         _countOfRightAnswersStr.value = String.format(
             context.resources.getString(R.string.answers_progress),

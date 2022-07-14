@@ -1,11 +1,14 @@
 package com.example.braintrainer.presentation
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import com.example.braintrainer.R
@@ -26,9 +29,6 @@ class GameFragment : Fragment() {
         )[GameViewModel::class.java]
     }
 
-
-    private var maxSumValue: Int? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parseArgs()
@@ -47,6 +47,7 @@ class GameFragment : Fragment() {
         }
         setupScreen()
         setupBtnListeners()
+        viewModel.startGame(level)
     }
 
     private fun setupBtnListeners(){
@@ -95,10 +96,35 @@ class GameFragment : Fragment() {
         viewModel.countOfRightAnswersStr.observe(viewLifecycleOwner){
             binding.tvProgress.text = it.toString()
         }
+        viewModel.percentsOfRightAnswers.observe(viewLifecycleOwner){
+            binding.progressBar.setProgress(it, true)
+        }
+        viewModel.enoughCountOfRightAnswers.observe(viewLifecycleOwner){
+            val colorId = if(it){
+                android.R.color.holo_green_light
+            }
+            else{
+                android.R.color.holo_red_light
+            }
+            val color = ContextCompat.getColor(requireContext(), colorId)
+            binding.tvProgress.setTextColor(color)
+        }
+        viewModel.enoughPercentOfRightAnswers.observe(viewLifecycleOwner){
+            val colorId = if(it){
+                android.R.color.holo_green_light
+            }
+            else{
+                android.R.color.holo_red_light
+            }
+            val color = ContextCompat.getColor(requireContext(), colorId)
+            binding.progressBar.progressTintList = ColorStateList.valueOf(color)
+        }
+        viewModel.secondaryPercent.observe(viewLifecycleOwner){
+            binding.progressBar.secondaryProgress = it
+        }
         viewModel.gameResult.observe(viewLifecycleOwner){
             launchResultFragment(it)
         }
-        viewModel.startGame(level)
     }
 
 
