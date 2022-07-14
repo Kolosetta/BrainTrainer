@@ -14,7 +14,7 @@ import com.example.braintrainer.domain.entities.Question
 import com.example.braintrainer.domain.usecases.GenerateQuestionUseCase
 import com.example.braintrainer.domain.usecases.GetGameSettingsUseCase
 
-class GameFragmentViewModel(application: Application) : AndroidViewModel(application) {
+class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     //TODO Заменить DI, чтобы не нарушать чистую архитектуру
     private val repository = GameRepositoryImpl
@@ -35,9 +35,9 @@ class GameFragmentViewModel(application: Application) : AndroidViewModel(applica
         get() = _percentsOfRightAnswers
 
     //Хранит кол-во правильных ответов
-    private val _countOfRightAnswers = MutableLiveData<String>()
-    val countOfRightAnswersLD: LiveData<String>
-        get() = _countOfRightAnswers
+    private val _countOfRightAnswersStr = MutableLiveData<String>()
+    val countOfRightAnswersStr: LiveData<String>
+        get() = _countOfRightAnswersStr
 
     //Хранит минимальынй процент, необходимы для победы в зависимости от уровня сложности
     private val _secondaryPercent = MutableLiveData<Int>()
@@ -111,7 +111,7 @@ class GameFragmentViewModel(application: Application) : AndroidViewModel(applica
     private fun updateProgress(){
         val progressPercent = ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt() //В процентах
         _percentsOfRightAnswers.value = progressPercent
-        _countOfRightAnswers.value = String.format(
+        _countOfRightAnswersStr.value = String.format(
             context.resources.getString(R.string.answers_progress),
             countOfRightAnswers,
             gameSettings.minCountOfRightAnswers
@@ -136,7 +136,7 @@ class GameFragmentViewModel(application: Application) : AndroidViewModel(applica
     private fun formatTime(millsecs: Long): String{
         var seconds = millsecs / 1000
         val minutes = seconds / SECONDS_IN_MINUTE
-        seconds -= millsecs * SECONDS_IN_MINUTE
+        seconds %= SECONDS_IN_MINUTE
         return String.format("%02d:%02d", minutes, seconds)
     }
 
