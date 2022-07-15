@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import com.example.braintrainer.R
 import com.example.braintrainer.databinding.FragmentResultBinding
 import com.example.braintrainer.databinding.FragmentWelcomeBinding
@@ -65,16 +66,6 @@ class ResultFragment : Fragment() {
     }
 
     private fun setupClickListeners(){
-        //Переопределяем кнопку назад в активити
-        //Добавляем LifecycleOwner, чтобы при удалении фрагмента, удалялся и слушатель кнопки назад
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    retryGame()
-                }
-            })
-
         binding.retryButton.setOnClickListener {
             retryGame()
         }
@@ -88,12 +79,11 @@ class ResultFragment : Fragment() {
     }
 
     private fun retryGame() {
-        requireActivity().supportFragmentManager
-            .popBackStack(GameFragment.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        findNavController().popBackStack()
     }
 
     companion object {
-        private const val GAME_RESULT = "game_result"
+        const val GAME_RESULT = "game_result"
 
         fun newInstance(gameResult: GameResult): ResultFragment {
             return ResultFragment().apply {
