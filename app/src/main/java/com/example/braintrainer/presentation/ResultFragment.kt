@@ -28,6 +28,9 @@ class ResultFragment : Fragment() {
     }
 
     private fun setupScreen() {
+
+        binding.gameResult = args.gameResult
+
         binding.smileResult.setImageResource(
             if (args.gameResult.isWon) {
                 R.drawable.ic_happy_smile
@@ -36,7 +39,7 @@ class ResultFragment : Fragment() {
             }
         )
 
-        binding.tvRequiredAnswers.text = String.format(
+        /*binding.tvRequiredAnswers.text = String.format(
             requireContext().resources.getString(R.string.required_answers_label),
             args.gameResult.gameSettings.minCountOfRightAnswers.toString()
         )
@@ -48,7 +51,7 @@ class ResultFragment : Fragment() {
         binding.tvRequiredPercent.text = String.format(
             requireContext().resources.getString(R.string.required_percent_answers_label),
             args.gameResult.gameSettings.minPercentOfRightAnswers.toString()
-        )
+        )*/
         binding.tvActualPercent.text = String.format(
             requireContext().resources.getString(R.string.your_percent_label),
             ((args.gameResult.countOfRightAnswers / args.gameResult.countOfQuestions.toDouble()) * 100)
