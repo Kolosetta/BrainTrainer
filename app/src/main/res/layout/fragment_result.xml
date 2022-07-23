@@ -34,7 +34,7 @@
             android:layout_marginVertical="8dp"
             android:gravity="center"
             android:lineSpacingExtra="6dp"
-            android:text="@{gameResult.gameSettings.minCountOfRightAnswersStr}"
+            app:requiredAnswers="@{gameResult.gameSettings.minCountOfRightAnswers}"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
