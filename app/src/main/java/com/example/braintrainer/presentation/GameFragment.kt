@@ -1,20 +1,16 @@
 package com.example.braintrainer.presentation
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.braintrainer.databinding.FragmentGameBinding
 import com.example.braintrainer.domain.entities.GameResult
-import com.example.braintrainer.domain.entities.GameSettings
 
 class GameFragment : Fragment() {
 
@@ -37,87 +33,13 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.answer1.setOnClickListener{
-            launchResultFragment(GameResult(true, 10,20,
-                GameSettings(10,10,10,10)))
-        }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         setupScreen()
-        setupBtnListeners()
         viewModel.startGame(args.level)
     }
 
-    private fun setupBtnListeners(){
-        binding.answer1.setOnClickListener {
-            val answer = (it as TextView).text.toString().toInt()
-            viewModel.checkAnswer(answer)
-        }
-        binding.answer2.setOnClickListener {
-            val answer = (it as TextView).text.toString().toInt()
-            viewModel.checkAnswer(answer)
-        }
-        binding.answer3.setOnClickListener {
-            val answer = (it as TextView).text.toString().toInt()
-            viewModel.checkAnswer(answer)
-        }
-        binding.answer4.setOnClickListener {
-            val answer = (it as TextView).text.toString().toInt()
-            viewModel.checkAnswer(answer)
-        }
-        binding.answer5.setOnClickListener {
-            val answer = (it as TextView).text.toString().toInt()
-            viewModel.checkAnswer(answer)
-        }
-        binding.answer6.setOnClickListener {
-            val answer = (it as TextView).text.toString().toInt()
-            viewModel.checkAnswer(answer)
-        }
-    }
-
     private fun setupScreen(){
-        viewModel.timeLeft.observe(viewLifecycleOwner){
-            binding.tvTimer.text = it
-        }
-        viewModel.question.observe(viewLifecycleOwner){
-            with(binding) {
-                tvSum.text = it.sum.toString()
-                leftNumber.text = it.visibleNumber.toString()
-                answer1.text = it.answers[0].toString()
-                answer2.text = it.answers[1].toString()
-                answer3.text = it.answers[2].toString()
-                answer4.text = it.answers[3].toString()
-                answer5.text = it.answers[4].toString()
-                answer6.text = it.answers[5].toString()
-            }
-        }
-        viewModel.countOfRightAnswersStr.observe(viewLifecycleOwner){
-            binding.tvProgress.text = it.toString()
-        }
-        viewModel.percentsOfRightAnswers.observe(viewLifecycleOwner){
-            binding.progressBar.setProgress(it, true)
-        }
-        viewModel.enoughCountOfRightAnswers.observe(viewLifecycleOwner){
-            val colorId = if(it){
-                android.R.color.holo_green_light
-            }
-            else{
-                android.R.color.holo_red_light
-            }
-            val color = ContextCompat.getColor(requireContext(), colorId)
-            binding.tvProgress.setTextColor(color)
-        }
-        viewModel.enoughPercentOfRightAnswers.observe(viewLifecycleOwner){
-            val colorId = if(it){
-                android.R.color.holo_green_light
-            }
-            else{
-                android.R.color.holo_red_light
-            }
-            val color = ContextCompat.getColor(requireContext(), colorId)
-            binding.progressBar.progressTintList = ColorStateList.valueOf(color)
-        }
-        viewModel.secondaryPercent.observe(viewLifecycleOwner){
-            binding.progressBar.secondaryProgress = it
-        }
         viewModel.gameResult.observe(viewLifecycleOwner){
             launchResultFragment(it)
         }
