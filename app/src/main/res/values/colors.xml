@@ -10,4 +10,11 @@
     <color name="easy_green">#31B636</color>
     <color name="orange_normal">#FF9800</color>
     <color name="hard_red">#DF3A2E</color>
+    <color name="question_blue">#1144AA</color>
+    <color name="variant_yellow">#FFDA00</color>
+    <color name="answer_green">#67AB2B</color>
+    <color name="answer_dark_orange">#FF7640</color>
+    <color name="answer_yellow">#FFE800</color>
+    <color name="answer_orange">#FF9C08</color>
+    <color name="answer_sea_color">#00A779</color>
 </resources>
